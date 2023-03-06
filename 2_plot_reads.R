@@ -9,9 +9,19 @@ plot_counts = function(input_df = NA, n_breaks = 10){
             mutate(mateL_start = ifelse(strand=="C",POS,(POS+readlen+insert)), 
                    mateL_end = mateL_start+readlen, 
                    mateR_start = ifelse(strand=="W",POS,(mateL_start+insert-readlen)),
-                   mateR_end = mateR_start+readlen,
+                   mateR_end = mateR_start+readlen, # old way
                    insert_line_start =  ifelse((mateL_end < mateR_start), mateL_end, NA),
                    insert_line_end =  ifelse((mateL_end < mateR_start), mateR_start, NA)) 
+        
+        plotmin = floor(min(plotinput$mateL_start) / 1000000)
+        plotmax = ceiling(max(plotinput$mateR_end) / 1000000)
+        plotsize = plotmax - plotmin
+        plot_breaks = (plotmax - plotmin) / n_breaks
+        mychrom = unique(plotinput$CHROM)
+        
+        plotinput = plotinput %>% 
+            mutate(mateR_end = mateL_start + (mateL_start*(0.003 / plotsize)))
+            
         
         
         # loop to define y coordinate so that reads are not overlapping but as compact as possible
@@ -48,20 +58,22 @@ plot_counts = function(input_df = NA, n_breaks = 10){
             }
         }
         
-        plotmin = min(plotinput$mateL_start)
-        plotmax = max(plotinput$mateR_end)
-        plot_breaks = (plotmax - plotmin) / n_breaks
-        
         myplot = plotinput %>% 
-            mutate(y = ifelse(strand=="C",-(y-.5),(y-.5)), 
+            mutate(xmin = mateL_start / 1000000,
+                   xmax = mateR_end / 1000000,
+                   y = ifelse(strand=="C",-(y-.5),(y-.5)), 
                    strand = factor(strand, levels = c("W","C")),
                    insert_line_start = ifelse((insert_line_end - insert_line_start)< 55,NA, insert_line_start),
                    insert_line_end = ifelse((insert_line_end - insert_line_start)< 55,NA ,insert_line_end)) %>% 
             ggplot() + 
-            geom_rect(aes(xmin=mateL_start,xmax=mateL_end,ymin=y-.4,ymax=y+.4, fill = strand)) +
-            geom_rect(aes(xmin=mateR_start,xmax=mateR_end,ymin=y-.4,ymax=y+.4, fill = strand)) +
+            geom_rect(aes(xmin = xmin,
+                          xmax = xmax,# + (mateL_start*0.001), # old way
+                          ymin=y-.4,ymax=y+.4, fill = strand),
+                      linewidth = 100) +
             scale_fill_manual(values = c("sandybrown","paleturquoise4")) + 
-            theme_bw() + labs(title = mycell, y = "", x= "POS", fill = "Strand") + 
+            theme_bw() + 
+            labs(title = paste0(mycell," ",mychrom),
+                 y = "", x= "POS (Mb)", fill = "Strand") + 
             scale_x_continuous(breaks = seq(plotmin,plotmax,plot_breaks)) +
             theme(panel.grid.minor.y = element_blank(), panel.grid.major.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())
         print(myplot)
