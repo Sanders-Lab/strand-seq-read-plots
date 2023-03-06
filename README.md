@@ -17,9 +17,9 @@ The first step is to execute `1_extract_reads.sh` to extract the Watson and Cric
 
 ```
 bash 1_extract_reads.sh \
-  /fast/groups/ag_sanders/work/data/P1530/bam \
-  chr4:155000000-165000000 \
-  P1530_example_output.txt
+  /fast/groups/ag_sanders/work/data/OP_Strandseq/bam \
+  chr8:0-20000000 \
+  OP_example_output.txt
 ```
 Where the 1st command line argument is a directory containing the bam files of interest, the 2nd is the region of interest (format CHROM:Start-End), and the 3rd is a filepath for the output file.
 
@@ -33,9 +33,9 @@ source('2_plot_reads.R')
 library(tidyverse)
 
 reads_df = read.table("P1530_example_output.txt.gz", header = T) %>%
-  filter(cell == "P1530_i529_.sorted.mdup")
+  filter(cell == "SRR15009771")
   
-png("P1530_i529_chr4_example_plot.png", width = 900, height = 300)
+png("OP_chr8_example_plot.png", width = 900, height = 300)
 plot_counts(input_df = reads_df)
 dev.off()
 ```
