@@ -30,7 +30,7 @@ Where the 1st command line argument is a directory containing the bam files of i
 
 ## 2. Plot reads
 
-Next you can plot the reads in your region of interest in R, by sourcing the function in `2_plot_reads.R`.
+Next you can plot the reads in your region of interest in R, by sourcing the `plot_counts()` function in `2_plot_reads.R`.
 Here is an example script to visualise a region of interest on chr16 on P1530_i484:
 
 ```
