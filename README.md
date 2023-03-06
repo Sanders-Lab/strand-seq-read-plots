@@ -8,6 +8,11 @@ Clone this repository like so:
 git clone https://github.com/Sanders-Lab/strand-seq-read-plots
 ```
 
+Then you can change directory into the created folder to run the scripts:
+```
+cd strand-seq-read-plots
+```
+
 For the shell script you will need `samtools` installed and in your environment (e.g. via conda).
 For the R script you will require tidyverse for dplyr & ggplot2, which you can load with `library(tidyverse)` or install with `install.packages("tidyverse").
 
@@ -40,3 +45,5 @@ plot_counts(input_df = reads_df)
 dev.off()
 ```
 The output is the graph like the one below. Enjoy!
+
+![Alt text](https://raw.githubusercontent.com/benedict909/strand-seq-read-plots/main/P1530_chr16_example_plot.png "P1530_i484 Example")
