@@ -8,7 +8,7 @@ Clone this repository like so:
 git clone https://github.com/Sanders-Lab/strand-seq-read-plots
 ```
 
-For the shell script you will need `samtools` installed (e.g. via conda).
+For the shell script you will need `samtools` installed and in your environment (e.g. via conda).
 For the R script you will require tidyverse for dplyr & ggplot2, which you can load with `library(tidyverse)` or install with `install.packages("tidyverse").
 
 ## 1. Extract reads
