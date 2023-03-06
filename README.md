@@ -44,6 +44,6 @@ png("P1530_chr16_example_plot.png", width = 900, height = 300)
 plot_counts(input_df = reads_df)
 dev.off()
 ```
-The output is the graph like the one below. Enjoy!
+The output is the graph below. Enjoy!
 
 ![Alt text](https://raw.githubusercontent.com/benedict909/strand-seq-read-plots/main/P1530_chr16_example_plot.png "P1530_i484 Example")
