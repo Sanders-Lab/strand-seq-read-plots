@@ -1,4 +1,4 @@
-plot_counts = function(input_df = NA, n_breaks = 10){
+plot_counts = function(input_df = NA, n_breaks = 10, read_width_adjust_P1467_chr6 = FALSE){
     for(mycell in unique(input_df$cell)){
         print(mycell)
         
@@ -22,7 +22,18 @@ plot_counts = function(input_df = NA, n_breaks = 10){
         plotinput = plotinput %>% 
             mutate(mateR_end = mateL_start + (mateL_start*(0.003 / plotsize)))
             
-        
+        if(read_width_adjust_P1467_chr6){
+        adjust_constant = 0.00003 # value for this specific plot
+        }else{
+            adjust_constant = 0.003 # O.G. value
+        }
+    
+        plotinput = plotinput %>%
+            mutate(mateR_end = mateL_start + (mateL_start*(adjust_constant / plotsize)))
+            
+        # recalculate with new ends
+        plotmin = floor(min(plotinput$mateL_start) / 1000000)
+        plotmax = ceiling(max(plotinput$mateR_end) / 1000000)
         
         # loop to define y coordinate so that reads are not overlapping but as compact as possible
         plotinput$y = 1:nrow(plotinput)
