@@ -26,8 +26,9 @@ plot_counts = function(input_df = NA, n_breaks = 10){
         
         # loop to define y coordinate so that reads are not overlapping but as compact as possible
         plotinput$y = 1:nrow(plotinput)
+        print("running loop to determine coordinates for read plotting...")
         for(i in 1:nrow(plotinput)){
-            print(paste(i,"out of",nrow(plotinput)))
+            #print(paste(i,"out of",nrow(plotinput)))
             pot_lower_levels = plotinput$y[i] - 1
             current_start = plotinput$mateL_start[i]
             current_end = plotinput$mateR_end[i]
