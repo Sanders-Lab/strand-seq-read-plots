@@ -71,7 +71,7 @@ plot_counts = function(input_df = NA, n_breaks = 10){
                           xmax = xmax,# + (mateL_start*0.001), # old way
                           ymin=y-.4,ymax=y+.4, fill = strand),
                       linewidth = 100) +
-            scale_fill_manual(values = c("sandybrown","paleturquoise4")) + 
+            scale_fill_manual(values = c("sandybrown","paleturquoise4"), breaks =  c("W","C")) + 
             theme_bw() + 
             labs(title = paste0(mycell," ",mychrom),
                  y = "", x= "POS (Mb)", fill = "Strand") + 
