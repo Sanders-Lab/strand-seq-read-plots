@@ -25,7 +25,9 @@ plot_counts = function(input_df = NA, n_breaks = 10, read_width_adjust_P1467_chr
         if(read_width_adjust_P1467_chr6){
         adjust_constant = 0.00003 # value for this specific plot
         }else{
-            adjust_constant = 0.003 # O.G. value
+            # adjust_constant = 0.003 # O.G. value at 1.92 Mb wide
+            plotwidth_MB = (max(plotinput$mateR_end) - min(plotinput$mateL_start)) / 1000000
+            adjust_constant = plotwidth_MB * 0.002583 - 0.001907 # this equation came to me in a dream
         }
     
         plotinput = plotinput %>%
