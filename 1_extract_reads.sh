@@ -7,6 +7,7 @@
 
 # check if output already exists
 [ -f $3 ] && { echo "ERROR: output file $3 already exists, either delete it or choose a new name!" ; exit ; }
+[ -f ${3}.gz ] && { echo "ERROR: output file ${3}.gz already exists, either delete it or choose a new name!" ; exit ; }
 
 # create output file with header
 echo -e "cell\tflag\tCHROM\tPOS\tinsert\treadlen\tstrand" > $3
