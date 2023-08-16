@@ -5,11 +5,12 @@
 # March 2023
 # requires samtools
 
+# check if output already exists
+[ -f $3 ] && { echo "ERROR: output file $3 already exists, either delete it or choose a new name!" ; exit ; }
+
 # create output file with header
 echo -e "cell\tflag\tCHROM\tPOS\tinsert\treadlen\tstrand" > $3
 echo "writing individual read counts file to $3"
-
-[ -f $3 ] && { echo "ERROR: output file $3 already exists, either delete it or choose a new name!" ; exit ; }
 
 # run loop to count chrM reads in all bam files in $1
 for mybam in $(ls $1/*.bam)
