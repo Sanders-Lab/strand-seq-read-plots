@@ -13,8 +13,9 @@ Then you can change directory into the created folder to run the scripts:
 cd strand-seq-read-plots
 ```
 
-For the shell script you will need `samtools` installed and in your environment (e.g. via conda).
-For the R script you will require tidyverse for dplyr & ggplot2, which you can load with `library(tidyverse)` or install with `install.packages("tidyverse").
+For the shell script you will need `samtools` installed and in your environment (e.g. via conda: `conda install -c bioconda samtools`).
+For the R script you will require tidyverse for dplyr & ggplot2, which you can load with `library(tidyverse)` or install with `install.packages("tidyverse")`.
+Note that due to dependency issues, you may find it better to have samtools and R in different conda environments.
 
 ## 1. Extract reads
 
