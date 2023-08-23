@@ -23,7 +23,7 @@ The first step is to execute `1_extract_reads.sh` to extract the Watson and Cric
 
 ```
 bash 1_extract_reads.sh \
-  /fast/groups/ag_sanders/work/data/P1530/bam \
+  /fast/groups/ag_sanders/work/data/strand_seq/internal/human/P1530/bam \
   chr16:5643516-7570129 \
   P1530_example_output.txt
 ```
